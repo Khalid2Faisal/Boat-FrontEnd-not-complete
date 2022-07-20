@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getPosts, getFeaturedPosts } from "../features/blog/blogThunk";
 
 import { useAppSelector, useAppDispatch } from "../app/hooks";
+import Layout from "../components/Layout";
 
 const Home: NextPage = () => {
   const { posts, featuredPosts } = useAppSelector((state) => state.blog);
@@ -17,22 +18,21 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        {posts.map((post) => (
-          <p key={post.title}>{post.title}</p>
+    <Layout>
+      <h1 className="mt-16">Home page</h1>
+      <h2 className="mt-8">Featured Posts</h2>
+      <div className="mt-4">
+        {featuredPosts.map((post) => (
+          <p key={post.slug}>{post.title}</p>
         ))}
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        I am Footer
-      </footer>
-    </div>
+      </div>
+      <h2 className="mt-8">Posts</h2>
+      <div className="mt-4">
+        {posts.map((post) => (
+          <p key={post.slug}>{post.title}</p>
+        ))}
+      </div>
+    </Layout>
   );
 };
 
