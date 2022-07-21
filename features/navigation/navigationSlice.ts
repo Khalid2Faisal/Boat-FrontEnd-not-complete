@@ -1,13 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-interface NavigationState {
-  showMobileMenu: boolean;
-  showNavMenu: boolean;
-}
+import { NavigationState } from "./navigationTypes";
 
 const initialState: NavigationState = {
-  showMobileMenu: false,
-  showNavMenu: false,
+  layout: {
+    showMobileMenu: false,
+    showNavMenu: false,
+    rotateChevronIcon: false,
+  },
 };
 
 export const navigationSlice = createSlice({
@@ -15,14 +14,18 @@ export const navigationSlice = createSlice({
   initialState,
   reducers: {
     toggleMobileMenu: (state) => {
-      state.showMobileMenu = !state.showMobileMenu;
+      state.layout.showMobileMenu = !state.layout.showMobileMenu;
     },
     toggleNavMenu: (state) => {
-      state.showNavMenu = !state.showNavMenu;
+      state.layout.showNavMenu = !state.layout.showNavMenu;
+    },
+    toggleChevronIcon: (state) => {
+      state.layout.rotateChevronIcon = !state.layout.rotateChevronIcon;
     },
   },
 });
 
-export const { toggleMobileMenu, toggleNavMenu } = navigationSlice.actions;
+export const { toggleMobileMenu, toggleNavMenu, toggleChevronIcon } =
+  navigationSlice.actions;
 
 export default navigationSlice.reducer;

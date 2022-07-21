@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BlogState } from "./blogTypes";
-import { getPosts, getFeaturedPosts } from "./blogThunk";
+import { getFeaturedPosts, getPosts, getMorePosts } from "./blogThunk";
 
 const initialState: BlogState = {
+  featuredPosts: [],
   posts: [],
   categories: [],
   tags: [],
-  featuredPosts: [],
+  skip: 0,
+  limit: 9,
 };
 
 export const blogSlice = createSlice({
   name: "blog",
   initialState,
-  reducers: {},
+  reducers: {
+    setSkip: (state, action) => {
+      state.skip = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPosts.fulfilled, (state, action) => {
       state.posts = action.payload.blogs;
@@ -21,10 +27,15 @@ export const blogSlice = createSlice({
     }),
       builder.addCase(getFeaturedPosts.fulfilled, (state, action) => {
         state.featuredPosts = action.payload.blogs;
+      }),
+      builder.addCase(getMorePosts.fulfilled, (state, action) => {
+        state.posts = [...state.posts, ...action.payload.blogs];
+        state.categories = action.payload.categories;
+        state.tags = action.payload.tags;
       });
   },
 });
 
-// export const {} = blogSlice.actions;
+export const { setSkip } = blogSlice.actions;
 
 export default blogSlice.reducer;
