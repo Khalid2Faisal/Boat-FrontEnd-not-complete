@@ -7,13 +7,12 @@ import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {
   toggleMobileMenu,
   toggleNavMenu,
+  toggleChevronIcon,
 } from "../features/navigation/navigationSlice";
 
 export default function NavBar() {
-  const [rotate, setRotate] = useState(false);
-
-  const { showMobileMenu, showNavMenu } = useAppSelector(
-    (state) => state.navigation
+  const { showMobileMenu, showNavMenu, rotateChevronIcon } = useAppSelector(
+    (state) => state.navigation.layout
   );
   const dispatch = useAppDispatch();
 
@@ -92,11 +91,11 @@ export default function NavBar() {
                     </div>
                     <FiChevronDown
                       onClick={() => {
-                        setRotate(!rotate);
+                        dispatch(toggleChevronIcon());
                         dispatch(toggleNavMenu());
                       }}
                       className={`${
-                        rotate ? "rotate-180" : ""
+                        rotateChevronIcon ? "rotate-180" : ""
                       } cursor-pointer text-xl transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800`}
                     />
                   </div>

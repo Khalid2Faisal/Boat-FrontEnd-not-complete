@@ -1,4 +1,4 @@
-interface Category {
+export interface Category {
   _id: string;
   name: string;
   slug: string;
@@ -6,7 +6,7 @@ interface Category {
   updatedAt?: string;
 }
 
-interface Tag {
+export interface Tag {
   _id: string;
   name: string;
   slug: string;
@@ -14,13 +14,13 @@ interface Tag {
   updatedAt?: string;
 }
 
-interface User {
+export interface User {
   _id: string;
   name: string;
   username: string;
 }
 
-interface BlogPost {
+export interface BlogPost {
   _id: string;
   title: string;
   slug: string;
@@ -37,8 +37,10 @@ interface BlogPost {
 }
 
 export interface BlogState {
+  featuredPosts: BlogPost[];
   posts: BlogPost[];
   categories: Category[];
   tags: Tag[];
-  featuredPosts: BlogPost[];
+  skip: number;
+  limit: number;
 }
