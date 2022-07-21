@@ -24,7 +24,7 @@ export default function Layout({ children, title }: LayoutProps) {
         {children}
       </main>
 
-      <footer className="bg-indigo-50 xl:px-8 mt-8 sm:mt-16">
+      <footer className="bg-indigo-50 xl:px-8 mt-8 sm:mt-16 shadow-2xl">
         <Footer />
       </footer>
     </div>
