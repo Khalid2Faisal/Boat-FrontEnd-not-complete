@@ -5,13 +5,15 @@ import {
   getPosts,
   getFeaturedPosts,
   getMorePosts,
+  getBlogSize,
 } from "../features/blog/blogThunk";
 
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import Layout from "../components/Layout";
+import { ifWholeNumber } from "../utilities";
 
 const Home: NextPage = () => {
-  const { posts, featuredPosts, skip, limit } = useAppSelector(
+  const { posts, featuredPosts, skip, limit, size, count } = useAppSelector(
     (state) => state.blog
   );
   const dispatch = useAppDispatch();
@@ -19,7 +21,10 @@ const Home: NextPage = () => {
   useEffect(() => {
     dispatch(getPosts({ skip, limit }));
     dispatch(getFeaturedPosts());
+    dispatch(getBlogSize());
   }, []);
+
+  const isWholeNumber = ifWholeNumber(size, limit);
 
   return (
     <Layout>
@@ -36,12 +41,15 @@ const Home: NextPage = () => {
           <p key={post.slug}>{post.title}</p>
         ))}
       </div>
-      <button
-        onClick={() => dispatch(getMorePosts())}
-        className="mt-8 text-white bg-indigo-600 py-2 px-4"
-      >
-        load more
-      </button>
+
+      {count < size && (
+        <button
+          onClick={() => dispatch(getMorePosts())}
+          className="mt-8 text-white bg-indigo-600 py-2 px-4"
+        >
+          load more
+        </button>
+      )}
     </Layout>
   );
 };

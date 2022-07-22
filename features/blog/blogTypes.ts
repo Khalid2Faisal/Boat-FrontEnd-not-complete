@@ -43,4 +43,6 @@ export interface BlogState {
   tags: Tag[];
   skip: number;
   limit: number;
+  size: number;
+  count: number;
 }
