@@ -35,16 +35,7 @@ export const getMorePosts = createAsyncThunk(
   }
 );
 
-// const loadMore = () => {
-//   let toSkip = skip + limit;
-//   listBlogsWithCategoriesAndTags(toSkip, limit).then((data) => {
-//     if (data.error) {
-//       console.log(data.error);
-//     } else {
-//       setLoadedBlogs([...loadedBlogs, ...data.blogs]);
-//       setSize(data.size);
-//       setSkip(toSkip);
-//       console.log(blogsNumber);
-//     }
-//   });
-// };
+export const getBlogSize = createAsyncThunk("blog/getBlogSize", async () => {
+  const data = await blogService.getSize();
+  return data;
+});

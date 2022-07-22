@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BlogState } from "./blogTypes";
-import { getFeaturedPosts, getPosts, getMorePosts } from "./blogThunk";
+import {
+  getFeaturedPosts,
+  getPosts,
+  getMorePosts,
+  getBlogSize,
+} from "./blogThunk";
 
 const initialState: BlogState = {
   featuredPosts: [],
@@ -8,7 +13,9 @@ const initialState: BlogState = {
   categories: [],
   tags: [],
   skip: 0,
-  limit: 9,
+  limit: 3,
+  size: 0,
+  count: 0,
 };
 
 export const blogSlice = createSlice({
@@ -24,6 +31,7 @@ export const blogSlice = createSlice({
       state.posts = action.payload.blogs;
       state.categories = action.payload.categories;
       state.tags = action.payload.tags;
+      state.count = action.payload.count;
     }),
       builder.addCase(getFeaturedPosts.fulfilled, (state, action) => {
         state.featuredPosts = action.payload.blogs;
@@ -32,6 +40,10 @@ export const blogSlice = createSlice({
         state.posts = [...state.posts, ...action.payload.blogs];
         state.categories = action.payload.categories;
         state.tags = action.payload.tags;
+        state.count += action.payload.count;
+      }),
+      builder.addCase(getBlogSize.fulfilled, (state, action) => {
+        state.size = action.payload;
       });
   },
 });
