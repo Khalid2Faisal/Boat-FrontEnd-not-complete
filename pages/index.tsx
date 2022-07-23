@@ -10,7 +10,8 @@ import {
 
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import Layout from "../components/Layout";
-import { ifWholeNumber } from "../utilities";
+import FeaturedPosts from "../components/FeaturedPosts";
+import Posts from "../components/Posts";
 
 const Home: NextPage = () => {
   const { posts, featuredPosts, skip, limit, size, count } = useAppSelector(
@@ -24,22 +25,13 @@ const Home: NextPage = () => {
     dispatch(getBlogSize());
   }, []);
 
-  const isWholeNumber = ifWholeNumber(size, limit);
-
   return (
     <Layout>
-      <h1 className="mt-16">Home page</h1>
-      <h2 className="mt-8">Featured Posts</h2>
-      <div className="mt-4">
-        {featuredPosts.map((post) => (
-          <p key={post.slug}>{post.title}</p>
-        ))}
+      <div>
+        <FeaturedPosts posts={featuredPosts} />
       </div>
-      <h2 className="mt-8">Posts</h2>
       <div className="mt-4">
-        {posts.map((post) => (
-          <p key={post.slug}>{post.title}</p>
-        ))}
+        <Posts />
       </div>
 
       {count < size && (
