@@ -45,4 +45,7 @@ export interface BlogState {
   limit: number;
   size: number;
   count: number;
+  featuredPostsIsLoading: boolean;
+  postsIsLoading: boolean;
+  morePostsIsLoading: boolean;
 }

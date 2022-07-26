@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { BsArrowRight } from "react-icons/bs";
@@ -22,7 +21,7 @@ export default function FeaturedPostCard({ post }: FeaturedPostCardProps) {
           className="cursor-pointer"
         />
       </Link>
-      <h2 className="text-xl font-semibold leading-5 mt-8 text-gray-800">
+      <h2 className="text-xl font-semibold leading-6 mt-8 text-gray-800">
         {post.title}
       </h2>
       <div className="mt-6 flex items-center cursor-pointer">

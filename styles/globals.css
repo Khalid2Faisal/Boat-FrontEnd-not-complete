@@ -6,6 +6,18 @@ body {
   background-color: #f9fafb;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: #e0e7ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #a5b4fc;
+  border-radius: 20px;
+}
+
 .navbar {
   height: 600px;
 }
