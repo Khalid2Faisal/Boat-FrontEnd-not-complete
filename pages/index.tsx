@@ -12,11 +12,11 @@ import Layout from "../components/Layout";
 import FeaturedPosts from "../components/FeaturedPosts";
 import FeaturedPostsSkeleton from "../components/FeaturedPostsSkeleton";
 import Posts from "../components/Posts";
+import PostsSkeleton from "../components/PostsSkeleton";
 
 const Home: NextPage = () => {
-  const { featuredPostsIsLoading, skip, limit } = useAppSelector(
-    (state) => state.blog
-  );
+  const { featuredPostsIsLoading, postsIsLoading, skip, limit } =
+    useAppSelector((state) => state.blog);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
         {featuredPostsIsLoading ? <FeaturedPostsSkeleton /> : <FeaturedPosts />}
       </div>
       <div className="mt-4">
-        <Posts />
+        {postsIsLoading ? <PostsSkeleton /> : <Posts />}
       </div>
     </Layout>
   );

@@ -48,6 +48,7 @@ export const blogSlice = createSlice({
         state.categories = action.payload.categories;
         state.tags = action.payload.tags;
         state.count = action.payload.count;
+        state.postsIsLoading = false;
       }),
       builder.addCase(getMorePosts.pending, (state) => {
         state.morePostsIsLoading = true;
