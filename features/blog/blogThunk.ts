@@ -6,16 +6,24 @@ import { setSkip } from "../blog/blogSlice";
 export const getFeaturedPosts = createAsyncThunk(
   "blog/getFeaturedPosts",
   async () => {
-    const data = await blogService.getFeaturedPosts();
-    return data;
+    try {
+      const data = await blogService.getFeaturedPosts();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const getPosts = createAsyncThunk(
   "blog/getPosts",
   async ({ skip, limit }: { skip: number; limit: number }) => {
-    const data = await blogService.listAllPosts(skip, limit);
-    return data;
+    try {
+      const data = await blogService.listAllPosts(skip, limit);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -36,6 +44,30 @@ export const getMorePosts = createAsyncThunk(
 );
 
 export const getBlogSize = createAsyncThunk("blog/getBlogSize", async () => {
-  const data = await blogService.getSize();
-  return data;
+  try {
+    const data = await blogService.getSize();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 });
+
+export const getCategoryPosts = createAsyncThunk(
+  "blog/getCategoryPosts",
+  async ({
+    slug,
+    skip,
+    limit,
+  }: {
+    slug: string;
+    skip?: number;
+    limit?: number;
+  }) => {
+    try {
+      const data = await blogService.getCategoryPosts(slug, skip, limit);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
