@@ -5,11 +5,13 @@ import {
   getPosts,
   getMorePosts,
   getBlogSize,
+  getCategoryPosts,
 } from "./blogThunk";
 
 const initialState: BlogState = {
   featuredPosts: [],
   posts: [],
+  categoryPosts: {},
   categories: [],
   tags: [],
   skip: 0,
@@ -62,6 +64,10 @@ export const blogSlice = createSlice({
       }),
       builder.addCase(getBlogSize.fulfilled, (state, action) => {
         state.size = action.payload;
+      }),
+      builder.addCase(getCategoryPosts.fulfilled, (state, action) => {
+        state.categoryPosts[action.payload.category.slug] =
+          action.payload.blogs;
       });
   },
 });

@@ -39,6 +39,7 @@ export interface BlogPost {
 export interface BlogState {
   featuredPosts: BlogPost[];
   posts: BlogPost[];
+  categoryPosts: { [key: string]: BlogPost[] };
   categories: Category[];
   tags: Tag[];
   skip: number;

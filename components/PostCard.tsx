@@ -15,13 +15,13 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <div className="relative md:flex p-6 bg-white items-center gap-x-2 shadow-md rounded-md h-56">
+    <div className="relative md:flex p-6 bg-white items-center gap-x-2 shadow-md rounded-md md:h-56">
       <Link href={`/blog/${post.slug}`}>
         <img
           role="img"
           src={`${process.env.NEXT_PUBLIC_API_URL}/blog/photo/${post.slug}`}
           alt={post.title}
-          className="focus:outline-none sm:w-auto w-full h-full rounded-md cursor-pointer object-cover min-w-[30%]"
+          className="focus:outline-none sm:w-auto w-full md:h-full rounded-md cursor-pointer object-cover min-w-[30%]"
         />
       </Link>
       <div className="md:pl-6 w-full">
@@ -62,7 +62,7 @@ export default function PostCard({ post }: PostCardProps) {
               )}
             </div>
             <div className="flex space-x-1 items-center justify-end  text-gray-500">
-              <BiTime className="text-xs" />
+              <BiTime className="text-lg" />
               <p className="md:text-sm text-xs leading-3 text-gray-500">
                 {dayjs(post.updatedAt).fromNow()}
               </p>
