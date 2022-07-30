@@ -9,11 +9,21 @@ dayjs.extend(relativeTime);
 
 interface FeaturedPostCardProps {
   post: BlogPost;
+  index: number;
 }
 
-export default function FeaturedPostCard({ post }: FeaturedPostCardProps) {
+export default function FeaturedPostCard({
+  post,
+  index,
+}: FeaturedPostCardProps) {
   return (
-    <div className="mb-6 lg:mb-10">
+    <div
+      className={`mb-6 lg:mb-10 ${
+        index % 4 === 0 && index !== 0
+          ? "sm:break-before-column xl:break-before-avoid"
+          : ""
+      } ${index % 3 === 0 && index !== 0 ? "xl:break-before-column" : ""} `}
+    >
       <Link href={`/blog/${post.slug}`}>
         <img
           src={`${process.env.NEXT_PUBLIC_API_URL}/blog/photo/${post.slug}`}

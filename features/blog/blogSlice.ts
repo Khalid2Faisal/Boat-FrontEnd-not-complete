@@ -21,6 +21,7 @@ const initialState: BlogState = {
   featuredPostsIsLoading: true,
   postsIsLoading: true,
   morePostsIsLoading: false,
+  categoryPostsIsLoading: true,
 };
 
 export const blogSlice = createSlice({
@@ -45,6 +46,9 @@ export const blogSlice = createSlice({
         state.featuredPosts = action.payload.blogs;
         state.featuredPostsIsLoading = false;
       }),
+      builder.addCase(getPosts.pending, (state) => {
+        state.postsIsLoading = true;
+      }),
       builder.addCase(getPosts.fulfilled, (state, action) => {
         state.posts = action.payload.blogs;
         state.categories = action.payload.categories;
@@ -65,9 +69,13 @@ export const blogSlice = createSlice({
       builder.addCase(getBlogSize.fulfilled, (state, action) => {
         state.size = action.payload;
       }),
+      builder.addCase(getCategoryPosts.pending, (state) => {
+        state.categoryPostsIsLoading = true;
+      }),
       builder.addCase(getCategoryPosts.fulfilled, (state, action) => {
         state.categoryPosts[action.payload.category.slug] =
           action.payload.blogs;
+        state.categoryPostsIsLoading = false;
       });
   },
 });

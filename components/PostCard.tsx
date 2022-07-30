@@ -15,13 +15,13 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <div className="relative md:flex p-6 bg-white items-center gap-x-2 shadow-md rounded-md md:h-56">
+    <div className="relative sm:flex p-4 sm:p-6 bg-white items-center gap-x-4 shadow-md rounded-md sm:h-56 w-full">
       <Link href={`/blog/${post.slug}`}>
         <img
           role="img"
           src={`${process.env.NEXT_PUBLIC_API_URL}/blog/photo/${post.slug}`}
           alt={post.title}
-          className="focus:outline-none sm:w-auto w-full md:h-full rounded-md cursor-pointer object-cover min-w-[30%]"
+          className="focus:outline-none rounded-md cursor-pointer object-cover sm:w-[30%] w-full h-48"
         />
       </Link>
       <div className="md:pl-6 w-full">
@@ -34,7 +34,7 @@ export default function PostCard({ post }: PostCardProps) {
           </h3>
         </Link>
         <div className="lg:mt-5 mt-8">
-          <div className="flex items-end justify-between">
+          <div className="flex items-center justify-between">
             <div className="flex items-center">
               {post.postedBy && (
                 <>

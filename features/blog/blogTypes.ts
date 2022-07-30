@@ -49,4 +49,5 @@ export interface BlogState {
   featuredPostsIsLoading: boolean;
   postsIsLoading: boolean;
   morePostsIsLoading: boolean;
+  categoryPostsIsLoading: boolean;
 }
