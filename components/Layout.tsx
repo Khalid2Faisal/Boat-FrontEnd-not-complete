@@ -20,9 +20,7 @@ export default function Layout({ children, title }: LayoutProps) {
         <NavBar />
       </div>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center text-center">
-        {children}
-      </main>
+      <main className="">{children}</main>
 
       <footer className="bg-indigo-50 xl:px-8 mt-8 sm:mt-16 shadow-2xl">
         <Footer />

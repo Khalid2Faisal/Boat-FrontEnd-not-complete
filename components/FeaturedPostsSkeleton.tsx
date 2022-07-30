@@ -18,22 +18,10 @@ export default function FeaturedPostsSkeleton() {
           Whether article spirits new her covered hastily sitting her. Money
           witty books nor son
         </p>
-        <div className="2xl:container 2xl:mx-auto flex flex-wrap items-start justify-center pt-10 xl:pt-14 gap-6">
-          <div className="flex lg:flex-col sm:flex-row flex-col items-start lg:gap-0 gap-6 lg:w-96 w-auto">
-            <SkeletonCard imageHeightClass="h-110" />
-            <SkeletonCard />
-            <SkeletonCard />
-          </div>
-          <div className="flex lg:flex-col sm:flex-row flex-col items-start lg:gap-0 gap-6 lg:w-96 w-auto">
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard imageHeightClass="h-110" />
-          </div>
-          <div className="flex xl:flex-col sm:flex-row flex-col items-start xl:gap-0 gap-6 xl:w-96 w-auto">
-            <SkeletonCard imageHeightClass="h-110" />
-            <SkeletonCard />
-            <SkeletonCard />
-          </div>
+        <div className="columns-1 sm:columns-2 xl:columns-3 2xl:px-40 2xl:mx-auto pt-10 xl:pt-14 gap-6 w-full">
+          {[...Array(8)].map((_, index) => (
+            <SkeletonCard key={index} index={index} />
+          ))}
         </div>
       </div>
     </>

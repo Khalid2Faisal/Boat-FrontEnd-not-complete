@@ -18,19 +18,25 @@ export default function CategoryPosts() {
           return (
             <div className="mt-6" key={category}>
               <div className="flex justify-between items-baseline">
-                <h2 className="px-8 sm:px-0 text-2xl md:text-3xl focus:outline-none text-start text-gray-700 font-bold pt-0 mb-4 capitalize xl:mt-8">
+                <h2 className="sm:px-0 text-2xl md:text-3xl focus:outline-none text-start text-gray-700 font-bold pt-0 mb-4 capitalize xl:mt-8">
                   {category}
                 </h2>
                 <Link href={`/blog/category/${category}`}>
-                  <p className="inline-flex items-center text-indigo-700 hover:text-indigo-800 cursor-pointer">
+                  <p className="inline-flex items-center text-blue-700 hover:text-blue-800 cursor-pointer">
                     See More
-                    <BsArrowRight className="ml-1 mt-[4px] text-indigo-700 hover:text-indigo-800 cursor-pointer" />
+                    <BsArrowRight className="ml-1 mt-[4px] text-blue-700 hover:text-blue-800 cursor-pointer" />
                   </p>
                 </Link>
               </div>
               <div className="category-posts__posts grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-                {categoryPosts[category].map((post) => {
-                  return <CategoryPostCard key={post.slug} post={post} />;
+                {categoryPosts[category].map((post, index) => {
+                  return (
+                    <CategoryPostCard
+                      key={post.slug}
+                      post={post}
+                      index={index}
+                    />
+                  );
                 })}
               </div>
             </div>

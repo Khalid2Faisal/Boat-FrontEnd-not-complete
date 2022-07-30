@@ -15,10 +15,16 @@ import FeaturedPostsSkeleton from "../components/FeaturedPostsSkeleton";
 import Posts from "../components/Posts";
 import PostsSkeleton from "../components/PostsSkeleton";
 import CategoryPosts from "../components/CategoryPosts";
+import CategoryPostsSkeleton from "../components/CategoryPostsSkeleton";
 
 const Home: NextPage = () => {
-  const { featuredPostsIsLoading, postsIsLoading, skip, limit, categoryPosts } =
-    useAppSelector((state) => state.blog);
+  const {
+    featuredPostsIsLoading,
+    postsIsLoading,
+    categoryPostsIsLoading,
+    skip,
+    limit,
+  } = useAppSelector((state) => state.blog);
   const dispatch = useAppDispatch();
 
   const firstCategory = { slug: "tourism" };
@@ -49,7 +55,7 @@ const Home: NextPage = () => {
         {postsIsLoading ? <PostsSkeleton /> : <Posts />}
       </div>
       <div className="mt-4">
-        <CategoryPosts />
+        {categoryPostsIsLoading ? <CategoryPostsSkeleton /> : <CategoryPosts />}
       </div>
     </Layout>
   );
