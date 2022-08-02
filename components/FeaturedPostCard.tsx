@@ -24,7 +24,7 @@ export default function FeaturedPostCard({
           : ""
       } ${index % 3 === 0 && index !== 0 ? "xl:break-before-column" : ""} `}
     >
-      <Link href={`/blog/${post.slug}`}>
+      <Link href={`/blog/post/${post.slug}`}>
         <img
           src={`${process.env.NEXT_PUBLIC_API_URL}/blog/photo/${post.slug}`}
           alt={post.title}
@@ -35,7 +35,7 @@ export default function FeaturedPostCard({
         {post.title}
       </h2>
       <div className="mt-6 flex items-center cursor-pointer">
-        <Link href={`/blog/${post.slug}`}>
+        <Link href={`/blog/post/${post.slug}`}>
           <>
             <p className="pr-3 text-base font-medium leading-4 underline text-gray-800">
               continue reading

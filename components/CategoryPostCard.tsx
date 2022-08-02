@@ -17,7 +17,7 @@ export default function CategoryPostCard({
         index > 1 ? "hidden sm:block" : ""
       }`}
     >
-      <Link href={`/blog/${post.slug}`}>
+      <Link href={`/blog/post/${post.slug}`}>
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-800">
           {post.title}
         </h5>
@@ -25,7 +25,7 @@ export default function CategoryPostCard({
       {post.mdesc && (
         <p className="mb-3 font-normal text-gray-700">{post.mdesc}</p>
       )}
-      <Link href={`/blog/${post.slug}`}>
+      <Link href={`/blog/post/${post.slug}`}>
         <button className="inline-flex items-center text-sm font-medium text-center text-blue-700 hover:text-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
           <span className="inline-block">Read more</span>
           <BsArrowRight className="text-base text-blue-700 hover:text-blue-800 h-full ml-1 mt-[4px] cursor-pointer" />

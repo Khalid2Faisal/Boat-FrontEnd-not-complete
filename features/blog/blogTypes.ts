@@ -18,6 +18,7 @@ export interface User {
   _id: string;
   name: string;
   username: string;
+  about?: string;
 }
 
 export interface BlogPost {
