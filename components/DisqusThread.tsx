@@ -10,7 +10,7 @@ export default function DisqusThread({
 }) {
   const disqusShortname = process.env.NEXT_PUBLIC_DISQUS_SHORTNAME as string;
   const disqusConfig = {
-    url: `http://localhost:3000/blog/post/${slug}`,
+    url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/post/${slug}`,
     identifier: slug,
     title: title,
   };
