@@ -17,11 +17,9 @@ export default function CategoryPostCard({
         index > 1 ? "hidden sm:block" : ""
       }`}
     >
-      <Link href={`/blog/post/${post.slug}`}>
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-800">
-          {post.title}
-        </h5>
-      </Link>
+      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-800">
+        {post.title}
+      </h5>
       {post.mdesc && (
         <p className="mb-3 font-normal text-gray-700">{post.mdesc}</p>
       )}
