@@ -6,7 +6,7 @@ import { BlogPost, Category } from "../../../features/blog/blogTypes";
 import Layout from "../../../components/Layout";
 import PostContent from "../../../components/PostContent";
 import RelatedPosts from "../../../components/RelatedPosts";
-import DisqusThread from "../../../components/DisqusThread";
+// import DisqusThread from "../../../components/DisqusThread";
 
 const Post = ({
   post,
@@ -23,9 +23,9 @@ const Post = ({
       <section>
         <RelatedPosts posts={relatedPosts} />
       </section>
-      <section className="p-4">
+      {/* <section className="p-4">
         <DisqusThread slug={post.slug} title={post.title} />
-      </section>
+      </section> */}
     </Layout>
   );
 };
