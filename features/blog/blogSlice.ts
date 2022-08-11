@@ -39,40 +39,41 @@ export const blogSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getFeaturedPosts.pending, (state) => {
-      state.featuredPostsIsLoading = true;
-    }),
-      builder.addCase(getFeaturedPosts.fulfilled, (state, action) => {
+    builder
+      .addCase(getFeaturedPosts.pending, (state) => {
+        state.featuredPostsIsLoading = true;
+      })
+      .addCase(getFeaturedPosts.fulfilled, (state, action) => {
         state.featuredPosts = action.payload.blogs;
         state.featuredPostsIsLoading = false;
-      }),
-      builder.addCase(getPosts.pending, (state) => {
+      })
+      .addCase(getPosts.pending, (state) => {
         state.postsIsLoading = true;
-      }),
-      builder.addCase(getPosts.fulfilled, (state, action) => {
+      })
+      .addCase(getPosts.fulfilled, (state, action) => {
         state.posts = action.payload.blogs;
         state.categories = action.payload.categories;
         state.tags = action.payload.tags;
         state.count = action.payload.count;
         state.postsIsLoading = false;
-      }),
-      builder.addCase(getMorePosts.pending, (state) => {
+      })
+      .addCase(getMorePosts.pending, (state) => {
         state.morePostsIsLoading = true;
-      }),
-      builder.addCase(getMorePosts.fulfilled, (state, action) => {
+      })
+      .addCase(getMorePosts.fulfilled, (state, action) => {
         state.posts = [...state.posts, ...action.payload.blogs];
         state.categories = action.payload.categories;
         state.tags = action.payload.tags;
         state.count += action.payload.count;
         state.morePostsIsLoading = false;
-      }),
-      builder.addCase(getBlogSize.fulfilled, (state, action) => {
+      })
+      .addCase(getBlogSize.fulfilled, (state, action) => {
         state.size = action.payload;
-      }),
-      builder.addCase(getCategoryPosts.pending, (state) => {
+      })
+      .addCase(getCategoryPosts.pending, (state) => {
         state.categoryPostsIsLoading = true;
-      }),
-      builder.addCase(getCategoryPosts.fulfilled, (state, action) => {
+      })
+      .addCase(getCategoryPosts.fulfilled, (state, action) => {
         state.categoryPosts[action.payload.category.slug] =
           action.payload.blogs;
         state.categoryPostsIsLoading = false;
