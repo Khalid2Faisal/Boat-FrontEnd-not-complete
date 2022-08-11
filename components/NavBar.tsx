@@ -8,13 +8,26 @@ import {
   toggleMobileMenu,
   toggleNavMenu,
   toggleChevronIcon,
+  toggleRegisterModal,
+  toggleLoginModal,
 } from "../features/navigation/navigationSlice";
 
 export default function NavBar() {
-  const { showMobileMenu, showNavMenu, rotateChevronIcon } = useAppSelector(
-    (state) => state.navigation.layout
-  );
+  const {
+    showMobileMenu,
+    showNavMenu,
+    rotateChevronIcon,
+    showRegisterModal,
+    showLoginModal,
+  } = useAppSelector((state) => state.navigation.layout);
   const dispatch = useAppDispatch();
+
+  const toggleRegister = () => {
+    dispatch(toggleRegisterModal());
+  };
+  const toggleLogin = () => {
+    dispatch(toggleLoginModal());
+  };
 
   return (
     <div className={`bg-gray-200 ${showMobileMenu && "navbar"}`}>
@@ -51,7 +64,7 @@ export default function NavBar() {
                     />
                   </div>
                 </div>
-                <div className=" hidden sm:flex justify-end flex-row lg:pr-7 sm:pr-6 py-6 pr-4 pl-8">
+                {/* <div className=" hidden sm:flex justify-end flex-row lg:pr-7 sm:pr-6 py-6 pr-4 pl-8">
                   <div
                     aria-haspopup="true"
                     className=" flex justify-center items-center flex-row relative"
@@ -99,6 +112,20 @@ export default function NavBar() {
                       } cursor-pointer text-xl transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800`}
                     />
                   </div>
+                </div> */}
+                <div className="hidden sm:flex flex-row space-x-4 px-6 items-center">
+                  <button
+                    onClick={toggleRegister}
+                    className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-indigo-700 bg-white border border-indigo-700 focus:outline-none focus:bg-gray-200 hover:bg-gray-200 duration-150 justify-center items-center"
+                  >
+                    Register
+                  </button>
+                  <button
+                    onClick={toggleLogin}
+                    className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-600 hover:bg-indigo-600 duration-150 justify-center items-center"
+                  >
+                    Login
+                  </button>
                 </div>
                 {/* Burger Icon */}
                 <div
