@@ -1,6 +1,7 @@
 import React from "react";
 import { GetServerSideProps } from "next";
 
+import { useAppSelector } from "../../../app/hooks";
 import blogService from "../../../services/blog";
 import { BlogPost, Category } from "../../../features/blog/blogTypes";
 import Layout from "../../../components/Layout";
@@ -15,9 +16,11 @@ const Post = ({
   post: BlogPost;
   relatedPosts: BlogPost[];
 }) => {
+  const { showMobileMenu } = useAppSelector((state) => state.navigation.layout);
+
   return (
     <Layout>
-      <section>
+      <section className={`${showMobileMenu ? "mt-28" : ""}`}>
         <PostContent post={post} />
       </section>
       <section>

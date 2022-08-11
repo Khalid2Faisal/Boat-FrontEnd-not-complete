@@ -25,6 +25,7 @@ const Home: NextPage = () => {
     skip,
     limit,
   } = useAppSelector((state) => state.blog);
+  const { showMobileMenu } = useAppSelector((state) => state.navigation.layout);
   const dispatch = useAppDispatch();
 
   const firstCategory = { slug: "tourism" };
@@ -48,7 +49,7 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <div>
+      <div className={`${showMobileMenu ? "mt-20" : ""}`}>
         {featuredPostsIsLoading ? <FeaturedPostsSkeleton /> : <FeaturedPosts />}
       </div>
       <div className="mt-4">
