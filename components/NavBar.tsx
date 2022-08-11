@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { IoMdBoat, IoMdClose, IoMdSearch } from "react-icons/io";
-import { BiUser, BiMenu } from "react-icons/bi";
+import { BiUser, BiMenu, BiUserPlus } from "react-icons/bi";
 import { FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {
@@ -176,7 +176,7 @@ export default function NavBar() {
           id="MobileNavigation"
           className={`${
             showMobileMenu ? "" : "hidden"
-          } transform duration-150 sm:hidden h-full bg-white `}
+          } transform duration-150 sm:hidden h-full bg-white shadow-lg`}
         >
           <div className=" flex flex-col justify-between h-full ">
             <div className=" flex flex-col lg:px-7 sm:px-6 px-4">
@@ -201,8 +201,8 @@ export default function NavBar() {
                 />
               </div>
             </div>
-            <ul className="flex flex-row flex-wrap justify-between items-center p-4 absolute bottom-22 left-0 w-full bg-gray-50">
-              <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+            <ul className="flex flex-col justify-between items-start p-4 absolute bottom-22 left-0 w-full bg-gray-50">
+              {/* <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                 <div className="flex items-center">
                   <BiUser className="text-xl text-current" />
                   <span className="ml-2">My Profile</span>
@@ -214,10 +214,22 @@ export default function NavBar() {
                   <span className="ml-2">Account Settings</span>
                 </div>
               </li>
-              <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+              <li className="cursor-pointer text-red-600 text-sm leading-3 tracking-normal py-2 hover:text-red-700 focus:text-red-700 focus:outline-none flex items-center">
                 <div className="flex items-center">
                   <FiLogOut className="text-xl text-current" />
                   <span className="ml-2">Log out</span>
+                </div>
+              </li> */}
+              <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                <div onClick={toggleRegister} className="flex items-center">
+                  <BiUserPlus className="text-xl text-current" />
+                  <span className="ml-2">Register</span>
+                </div>
+              </li>
+              <li className="cursor-pointer text-indigo-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                <div onClick={toggleLogin} className="flex items-center">
+                  <FiLogOut className="text-xl text-current" />
+                  <span className="ml-2">Login</span>
                 </div>
               </li>
             </ul>
