@@ -4,6 +4,12 @@ export interface PreRegisterData {
   password: string;
 }
 
+export interface LoginData {
+  token: string;
+  message: string;
+  user: object;
+}
+
 export interface User {
   _id: string;
   name: string;

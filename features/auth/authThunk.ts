@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AxiosResponse, AxiosError } from "axios";
 
 import authService from "../../services/auth";
 
@@ -41,7 +40,11 @@ export const login = createAsyncThunk(
   "auth/login",
   async (user: { email: string; password: string }, thunkAPI) => {
     try {
-      return await authService.login(user);
+      const loginData = await authService.login(user);
+      if (loginData) {
+        authService.authenticate(loginData);
+      }
+      return loginData;
     } catch (error: any) {
       const message =
         (error.response && error.response.data && error.response.data.error) ||
@@ -52,11 +55,16 @@ export const login = createAsyncThunk(
   }
 );
 
+type LogOutArgs = Function | undefined;
+
 export const logout = createAsyncThunk(
   "auth/logout",
-  async (next: Function, thunkAPI) => {
+  async (next: LogOutArgs, thunkAPI) => {
     try {
-      return await authService.logout(next);
+      if (next) {
+        return await authService.logout(next);
+      }
+      return await authService.logout();
     } catch (error: any) {
       const message =
         (error.response && error.response.data && error.response.data.error) ||
