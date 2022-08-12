@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import { IoMdClose } from "react-icons/io";
+import { toast } from "react-toastify";
 
-import { useAppDispatch } from "../app/hooks";
-import authService from "../services/auth";
-import { toggleLoginModal } from "../features/navigation/navigationSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {
+  toggleChevronIcon,
+  toggleLoginModal,
+} from "../features/navigation/navigationSlice";
+import { login } from "../features/auth/authThunk";
+import { reset } from "../features/auth/authSlice";
 
 type InputEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -15,7 +20,25 @@ export default function LoginUser() {
     password: "",
   });
 
+  const { isSuccess, isError, isLoading, message } = useAppSelector(
+    (state) => state.auth
+  );
+
   const { email, password } = formData;
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(reset());
+      toast.success(message);
+      dispatch(toggleLoginModal());
+      dispatch(toggleChevronIcon());
+    }
+    if (isError) {
+      dispatch(reset());
+      toast.error(message);
+      setFormData({ ...formData, email: "", password: "" });
+    }
+  }, [isSuccess, isError, message]);
 
   const onChange = (e: InputEvent) => {
     // e is the event object
@@ -25,12 +48,11 @@ export default function LoginUser() {
     }));
   };
 
-  // const onSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const userData = { name, email, password };
-  //   console.log(userData);
-  //   authService.preRegister(userData);
-  // };
+  const onFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const userData = { email, password };
+    dispatch(login(userData));
+  };
 
   const onClose = () => {
     dispatch(toggleLoginModal());
@@ -48,7 +70,10 @@ export default function LoginUser() {
       >
         {/* <div className="w-full h-full bg-gray-900 z-0 absolute inset-0" /> */}
         <div className="flex flex-col items-center justify-center w-full">
-          <form className="bg-white h-full shadow rounded w-full p-6 xl:p-8">
+          <form
+            onSubmit={onFormSubmit}
+            className="bg-white h-full shadow rounded w-full p-6 xl:p-8"
+          >
             <div className="cursor-pointer absolute top-5 right-2 m-3 text-gray-800 transition duration-150 ease-in-out">
               <IoMdClose className="text-2xl" onClick={onClose} />
             </div>
@@ -149,7 +174,6 @@ export default function LoginUser() {
                 role="button"
                 aria-label="create my account"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
-                // onClick={onSubmit}
                 type="submit"
               >
                 Login

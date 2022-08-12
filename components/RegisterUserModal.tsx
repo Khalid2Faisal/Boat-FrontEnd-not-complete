@@ -34,7 +34,7 @@ export default function RegisterUser() {
       toast.error(message);
       setFormData({ ...formData, name: "", email: "", password: "" });
     }
-  }, [dispatch, isSuccess, isError, isLoading, message]);
+  }, [isSuccess, isError, message]);
 
   const onChange = (e: InputEvent) => {
     // e is the event object
@@ -44,7 +44,7 @@ export default function RegisterUser() {
     }));
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const userData = { name, email, password };
     dispatch(preRegister(userData));
@@ -66,7 +66,10 @@ export default function RegisterUser() {
       >
         {/* <div className="w-full h-full bg-gray-900 z-0 absolute inset-0" /> */}
         <div className="flex flex-col items-center justify-center w-full">
-          <form className="bg-white h-full shadow rounded w-full p-6 xl:p-8">
+          <form
+            onSubmit={onFormSubmit}
+            className="bg-white h-full shadow rounded w-full p-6 xl:p-8"
+          >
             <div className="cursor-pointer absolute top-5 right-2 m-3 text-gray-800 transition duration-150 ease-in-out">
               <IoMdClose className="text-2xl" onClick={onClose} />
             </div>
@@ -145,7 +148,7 @@ export default function RegisterUser() {
                 onChange={onChange}
               />
             </div>
-            <div>
+            <div className="mt-6  w-full">
               <label className="text-sm font-medium leading-none text-gray-800">
                 Email
               </label>
@@ -182,7 +185,6 @@ export default function RegisterUser() {
                 role="button"
                 aria-label="create my account"
                 className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
-                onClick={onSubmit}
                 type="submit"
               >
                 Create my account

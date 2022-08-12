@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import { IoMdBoat, IoMdClose, IoMdSearch } from "react-icons/io";
 import { BiUser, BiMenu, BiUserPlus } from "react-icons/bi";
 import { FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
+
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {
   toggleMobileMenu,
@@ -11,22 +13,42 @@ import {
   toggleRegisterModal,
   toggleLoginModal,
 } from "../features/navigation/navigationSlice";
+import { logout } from "../features/auth/authThunk";
 
 export default function NavBar() {
-  const {
-    showMobileMenu,
-    showNavMenu,
-    rotateChevronIcon,
-    showRegisterModal,
-    showLoginModal,
-  } = useAppSelector((state) => state.navigation.layout);
   const dispatch = useAppDispatch();
+
+  const [isSSR, setIsSSR] = useState(true);
+  const { showMobileMenu, showNavMenu, rotateChevronIcon } = useAppSelector(
+    (state) => state.navigation.layout
+  );
+  const { user, isError, isLoading, isSuccess, message } = useAppSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    setIsSSR(false);
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(message);
+    }
+    if (isError) {
+      toast.error(message);
+    }
+  }, [isSuccess, isError, message]);
 
   const toggleRegister = () => {
     dispatch(toggleRegisterModal());
   };
   const toggleLogin = () => {
     dispatch(toggleLoginModal());
+  };
+
+  const onLogout = () => {
+    dispatch(logout());
+    dispatch(toggleChevronIcon());
   };
 
   return (
@@ -64,69 +86,75 @@ export default function NavBar() {
                     />
                   </div>
                 </div>
-                {/* <div className=" hidden sm:flex justify-end flex-row lg:pr-7 sm:pr-6 py-6 pr-4 pl-8">
-                  <div
-                    aria-haspopup="true"
-                    className=" flex justify-center items-center flex-row relative"
-                  >
-                    <ul
-                      className={`p-2 w-40 border-r bg-white absolute right-0 rounded z-40  shadow mt-64 ${
-                        !showNavMenu && "hidden"
-                      }`}
+                {!isSSR && user ? (
+                  <div className=" hidden sm:flex justify-end flex-row lg:pr-7 sm:pr-6 py-6 pr-4 pl-8">
+                    <div
+                      aria-haspopup="true"
+                      className=" flex justify-center items-center flex-row relative"
                     >
-                      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                        <div className="flex items-center">
-                          <BiUser className="text-xl text-current" />
-                          <span className="ml-2">My Profile</span>
-                        </div>
-                      </li>
-                      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                        <FiSettings className="text-xl text-current" />
-                        <span className="ml-2">Account Settings</span>
-                      </li>
-                      <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                        <FiLogOut className="text-xl text-current" />
-                        <span className="ml-2">Log out</span>
-                      </li>
-                    </ul>
-                    <img
-                      className="w-10 h-10 "
-                      src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
-                      alt="individual person image-3"
-                    />
-                    <div className="ml-2">
-                      <p className="text-lg leading-4 font-semibold text-gray-800">
-                        David Hulk
-                      </p>
-                      <p className=" font-normal text-xs leading-3 text-gray-600 mt-1">
-                        david@alphahulk.com
-                      </p>
+                      <ul
+                        className={`p-2 w-40 border-r bg-white absolute right-0 rounded z-40  shadow mt-64 ${
+                          !showNavMenu && "hidden"
+                        }`}
+                      >
+                        <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                          <div className="flex items-center">
+                            <BiUser className="text-xl text-current" />
+                            <span className="ml-2">My Profile</span>
+                          </div>
+                        </li>
+                        <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                          <FiSettings className="text-xl text-current" />
+                          <span className="ml-2">Account Settings</span>
+                        </li>
+                        <li className="cursor-pointer transition-colors ease-in text-red-500 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-red-700 focus:text-red-700 focus:outline-none flex items-center">
+                          <div className="flex items-center" onClick={onLogout}>
+                            <FiLogOut className="text-xl text-current" />
+                            <span className="ml-2">Log out</span>
+                          </div>
+                        </li>
+                      </ul>
+                      <img
+                        className="w-10 h-10 "
+                        src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
+                        alt="individual person image-3"
+                      />
+                      <div className="ml-2">
+                        <p className="text-lg leading-4 font-semibold text-gray-800">
+                          David Hulk
+                        </p>
+                        <p className=" font-normal text-xs leading-3 text-gray-600 mt-1">
+                          david@alphahulk.com
+                        </p>
+                      </div>
+                      <FiChevronDown
+                        onClick={() => {
+                          dispatch(toggleChevronIcon());
+                          dispatch(toggleNavMenu());
+                        }}
+                        className={`${
+                          rotateChevronIcon ? "rotate-180" : ""
+                        } cursor-pointer text-xl transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800`}
+                      />
                     </div>
-                    <FiChevronDown
-                      onClick={() => {
-                        dispatch(toggleChevronIcon());
-                        dispatch(toggleNavMenu());
-                      }}
-                      className={`${
-                        rotateChevronIcon ? "rotate-180" : ""
-                      } cursor-pointer text-xl transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800`}
-                    />
                   </div>
-                </div> */}
-                <div className="hidden sm:flex flex-row space-x-4 px-6 items-center">
-                  <button
-                    onClick={toggleRegister}
-                    className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-indigo-700 bg-white border border-indigo-700 focus:outline-none focus:bg-gray-200 hover:bg-gray-200 duration-150 justify-center items-center"
-                  >
-                    Register
-                  </button>
-                  <button
-                    onClick={toggleLogin}
-                    className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-600 hover:bg-indigo-600 duration-150 justify-center items-center"
-                  >
-                    Login
-                  </button>
-                </div>
+                ) : (
+                  <div className="hidden sm:flex flex-row space-x-4 px-6 items-center">
+                    <button
+                      onClick={toggleRegister}
+                      className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-indigo-700 bg-white border border-indigo-700 focus:outline-none focus:bg-gray-200 hover:bg-gray-200 duration-150 justify-center items-center"
+                    >
+                      Register
+                    </button>
+                    <button
+                      onClick={toggleLogin}
+                      className="rounded-md flex space-x-2 w-24 h-10 font-normal text-sm leading-3 text-white bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-600 hover:bg-indigo-600 duration-150 justify-center items-center"
+                    >
+                      Login
+                    </button>
+                  </div>
+                )}
+
                 {/* Burger Icon */}
                 <div
                   id="bgIcon"
@@ -201,53 +229,60 @@ export default function NavBar() {
                 />
               </div>
             </div>
-            <ul className="flex flex-col justify-between items-start p-4 absolute bottom-22 left-0 w-full bg-gray-50">
-              {/* <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                <div className="flex items-center">
-                  <BiUser className="text-xl text-current" />
-                  <span className="ml-2">My Profile</span>
+            {!isSSR && user ? (
+              <ul className="flex flex-col justify-between items-start p-4 absolute bottom-22 left-0 w-full bg-gray-50">
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                  <div className="flex items-center">
+                    <BiUser className="text-xl text-current" />
+                    <span className="ml-2">My Profile</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                  <div className="flex items-center">
+                    <FiSettings className="text-xl text-current" />
+                    <span className="ml-2">Account Settings</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-red-600 text-sm leading-3 tracking-normal py-2 hover:text-red-700 focus:text-red-700 focus:outline-none flex items-center">
+                  <div onClick={onLogout} className="flex items-center">
+                    <FiLogOut className="text-xl text-current" />
+                    <span className="ml-2">Log out</span>
+                  </div>
+                </li>
+              </ul>
+            ) : (
+              <ul className="flex flex-col justify-between items-start p-4 absolute bottom-22 left-0 w-full bg-gray-50">
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div onClick={toggleRegister} className="flex items-center">
+                    <BiUserPlus className="text-xl text-current" />
+                    <span className="ml-2">Register</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-indigo-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div onClick={toggleLogin} className="flex items-center">
+                    <FiLogOut className="text-xl text-current" />
+                    <span className="ml-2">Login</span>
+                  </div>
+                </li>
+              </ul>
+            )}
+            {!isSSR && user ? (
+              <div className=" flex items-center flex-row py-6 px-8 bg-gray-100 absolute bottom-0 left-0 w-full">
+                <img
+                  className="w-10 h-10 "
+                  src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
+                  alt="individual person image-3"
+                />
+                <div className="ml-2">
+                  <p className="text-lg leading-4 font-semibold text-gray-800">
+                    David Hulk
+                  </p>
+                  <p className=" font-normal text-xs leading-3 text-gray-600 mt-1">
+                    david@alphahulk.com
+                  </p>
                 </div>
-              </li>
-              <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                <div className="flex items-center">
-                  <FiSettings className="text-xl text-current" />
-                  <span className="ml-2">Account Settings</span>
-                </div>
-              </li>
-              <li className="cursor-pointer text-red-600 text-sm leading-3 tracking-normal py-2 hover:text-red-700 focus:text-red-700 focus:outline-none flex items-center">
-                <div className="flex items-center">
-                  <FiLogOut className="text-xl text-current" />
-                  <span className="ml-2">Log out</span>
-                </div>
-              </li> */}
-              <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                <div onClick={toggleRegister} className="flex items-center">
-                  <BiUserPlus className="text-xl text-current" />
-                  <span className="ml-2">Register</span>
-                </div>
-              </li>
-              <li className="cursor-pointer text-indigo-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                <div onClick={toggleLogin} className="flex items-center">
-                  <FiLogOut className="text-xl text-current" />
-                  <span className="ml-2">Login</span>
-                </div>
-              </li>
-            </ul>
-            <div className=" flex items-center flex-row py-6 px-8 bg-gray-100 absolute bottom-0 left-0 w-full">
-              <img
-                className="w-10 h-10 "
-                src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
-                alt="individual person image-3"
-              />
-              <div className="ml-2">
-                <p className="text-lg leading-4 font-semibold text-gray-800">
-                  David Hulk
-                </p>
-                <p className=" font-normal text-xs leading-3 text-gray-600 mt-1">
-                  david@alphahulk.com
-                </p>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>
