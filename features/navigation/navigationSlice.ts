@@ -5,7 +5,6 @@ const initialState: NavigationState = {
   layout: {
     showMobileMenu: false,
     showNavMenu: false,
-    rotateChevronIcon: false,
     showRegisterModal: false,
     showLoginModal: false,
   },
@@ -21,8 +20,8 @@ export const navigationSlice = createSlice({
     toggleNavMenu: (state) => {
       state.layout.showNavMenu = !state.layout.showNavMenu;
     },
-    toggleChevronIcon: (state) => {
-      state.layout.rotateChevronIcon = !state.layout.rotateChevronIcon;
+    closeNavMenu: (state) => {
+      state.layout.showNavMenu = false;
     },
     toggleRegisterModal: (state) => {
       state.layout.showRegisterModal = !state.layout.showRegisterModal;
@@ -38,7 +37,7 @@ export const navigationSlice = createSlice({
 export const {
   toggleMobileMenu,
   toggleNavMenu,
-  toggleChevronIcon,
+  closeNavMenu,
   toggleRegisterModal,
   toggleLoginModal,
 } = navigationSlice.actions;

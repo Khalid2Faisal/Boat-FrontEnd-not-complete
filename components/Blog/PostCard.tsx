@@ -4,8 +4,8 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { BiTime } from "react-icons/bi";
 
-import smartTrim from "../helpers/smartTrim";
-import { BlogPost } from "../features/blog/blogTypes";
+import smartTrim from "../../helpers/smartTrim";
+import { BlogPost } from "../../features/blog/blogTypes";
 
 dayjs.extend(relativeTime);
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { getMorePosts } from "../features/blog/blogThunk";
-import { setMorePostsIsLoading } from "../features/blog/blogSlice";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { getMorePosts } from "../../features/blog/blogThunk";
+import { setMorePostsIsLoading } from "../../features/blog/blogSlice";
 
 import PostCard from "./PostCard";
 

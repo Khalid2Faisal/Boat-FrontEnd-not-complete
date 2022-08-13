@@ -5,8 +5,8 @@ import { useAppSelector } from "../../../app/hooks";
 import blogService from "../../../services/blog";
 import { BlogPost, Category } from "../../../features/blog/blogTypes";
 import Layout from "../../../components/Layout";
-import PostContent from "../../../components/PostContent";
-import RelatedPosts from "../../../components/RelatedPosts";
+import PostContent from "../../../components/Blog/PostContent";
+import RelatedPosts from "../../../components/Blog/RelatedPosts";
 // import DisqusThread from "../../../components/DisqusThread";
 
 const Post = ({

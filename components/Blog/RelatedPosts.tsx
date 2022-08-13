@@ -1,5 +1,5 @@
 import React from "react";
-import { BlogPost } from "../features/blog/blogTypes";
+import { BlogPost } from "../../features/blog/blogTypes";
 import CategoryPostCard from "./CategoryPostCard";
 
 export default function RelatedPosts({ posts }: { posts: BlogPost[] }) {

@@ -3,7 +3,7 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { BsArrowRight } from "react-icons/bs";
-import { BlogPost } from "../features/blog/blogTypes";
+import { BlogPost } from "../../features/blog/blogTypes";
 
 dayjs.extend(relativeTime);
 

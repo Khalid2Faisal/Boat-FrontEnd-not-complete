@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
 
-import { BlogPost } from "../features/blog/blogTypes";
+import { BlogPost } from "../../features/blog/blogTypes";
 
 export default function CategoryPostCard({
   post,

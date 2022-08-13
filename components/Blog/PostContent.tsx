@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import parse from "html-react-parser";
 
-import { BlogPost } from "../features/blog/blogTypes";
+import { BlogPost } from "../../features/blog/blogTypes";
 
 export default function PostContent({ post }: { post: BlogPost }) {
   const { title, categories, tags, body, slug, postedBy } = post;

@@ -3,10 +3,10 @@ import { ReactNode } from "react";
 
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import RegisterUser from "./RegisterUserModal";
-import LoginUser from "./LoginUserModal";
+import RegisterUser from "../Auth/RegisterUserModal";
+import LoginUser from "../Auth/LoginUserModal";
 
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 
 interface LayoutProps {
   children: ReactNode;

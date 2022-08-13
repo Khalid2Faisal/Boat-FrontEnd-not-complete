@@ -3,7 +3,8 @@ import { useState, useEffect, FormEvent } from "react";
 import { useRouter } from "next/router";
 import { useAppDispatch } from "../../../../app/hooks";
 import { register } from "../../../../features/auth/authThunk";
-import AccountActivation from "../../../../components/AccountActivation";
+import AccountActivation from "../../../../components/Auth/AccountActivation";
+import Layout from "../../../../components/Layout";
 
 const Activate = () => {
   const [values, setValues] = useState({
@@ -30,7 +31,13 @@ const Activate = () => {
     dispatch(register({ token }));
   };
 
-  return <AccountActivation userName={name} handleSubmit={onSubmit} />;
+  return (
+    <Layout>
+      <div className="min-h-screen">
+        <AccountActivation userName={name} handleSubmit={onSubmit} />
+      </div>
+    </Layout>
+  );
 };
 
 export default Activate;
