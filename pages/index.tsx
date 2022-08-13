@@ -10,12 +10,12 @@ import {
 
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import Layout from "../components/Layout";
-import FeaturedPosts from "../components/FeaturedPosts";
-import FeaturedPostsSkeleton from "../components/FeaturedPostsSkeleton";
-import Posts from "../components/Posts";
-import PostsSkeleton from "../components/PostsSkeleton";
-import CategoryPosts from "../components/CategoryPosts";
-import CategoryPostsSkeleton from "../components/CategoryPostsSkeleton";
+import FeaturedPosts from "../components/Blog/FeaturedPosts";
+import FeaturedPostsSkeleton from "../components/Skeletons/FeaturedPostsSkeleton";
+import Posts from "../components/Blog/Posts";
+import PostsSkeleton from "../components/Skeletons/PostsSkeleton";
+import CategoryPosts from "../components/Blog/CategoryPosts";
+import CategoryPostsSkeleton from "../components/Skeletons/CategoryPostsSkeleton";
 
 const Home: NextPage = () => {
   const {

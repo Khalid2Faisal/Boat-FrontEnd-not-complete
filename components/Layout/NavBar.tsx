@@ -5,21 +5,22 @@ import { IoMdBoat, IoMdClose, IoMdSearch } from "react-icons/io";
 import { BiUser, BiMenu, BiUserPlus } from "react-icons/bi";
 import { FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
 
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   toggleMobileMenu,
   toggleNavMenu,
-  toggleChevronIcon,
+  closeNavMenu,
   toggleRegisterModal,
   toggleLoginModal,
-} from "../features/navigation/navigationSlice";
-import { logout } from "../features/auth/authThunk";
+} from "../../features/navigation/navigationSlice";
+import { logout } from "../../features/auth/authThunk";
+import { reset } from "../../features/auth/authSlice";
 
 export default function NavBar() {
   const dispatch = useAppDispatch();
 
   const [isSSR, setIsSSR] = useState(true);
-  const { showMobileMenu, showNavMenu, rotateChevronIcon } = useAppSelector(
+  const { showMobileMenu, showNavMenu } = useAppSelector(
     (state) => state.navigation.layout
   );
   const { user, isError, isLoading, isSuccess, message } = useAppSelector(
@@ -32,10 +33,14 @@ export default function NavBar() {
 
   useEffect(() => {
     if (isSuccess) {
+      dispatch(reset());
       toast.success(message);
+      dispatch(closeNavMenu());
     }
     if (isError) {
+      dispatch(reset());
       toast.error(message);
+      dispatch(closeNavMenu());
     }
   }, [isSuccess, isError, message]);
 
@@ -48,7 +53,7 @@ export default function NavBar() {
 
   const onLogout = () => {
     dispatch(logout());
-    dispatch(toggleChevronIcon());
+    dispatch(closeNavMenu());
   };
 
   return (
@@ -68,14 +73,17 @@ export default function NavBar() {
                 </Link>
                 {/* For large (i.e. desktop and laptop sized screen) */}
                 <div className="lg:flex hidden flex-auto justify-between flex-row px-7 border-l border-r border-gray-200 py-6">
-                  <div>
-                    <p className=" font-normal text-xs leading-3 text-gray-600">
-                      Hi David
-                    </p>
-                    <h3 className=" font-bold text-xl leading-5 text-gray-800 mt-2">
-                      Welcome Back
-                    </h3>
-                  </div>
+                  {!isSSR && user && (
+                    <div>
+                      <p className=" font-normal text-xs leading-3 text-gray-600">
+                        Hi {user?.name}
+                      </p>
+                      <h3 className=" font-bold text-xl leading-5 text-gray-800 mt-2">
+                        Welcome Back
+                      </h3>
+                    </div>
+                  )}
+
                   <div className=" focus:outline-none focus:ring foucs:ring-offset-2 focus:ring-gray-800 bg-gray-50 flex items-center px-4 py-3.5 space-x-3 rounded ">
                     <IoMdSearch className="text-gray-500 text-xl" />
                     <input
@@ -114,26 +122,21 @@ export default function NavBar() {
                           </div>
                         </li>
                       </ul>
-                      <img
-                        className="w-10 h-10 "
-                        src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
-                        alt="individual person image-3"
-                      />
                       <div className="ml-2">
                         <p className="text-lg leading-4 font-semibold text-gray-800">
-                          David Hulk
+                          {user?.name}
                         </p>
                         <p className=" font-normal text-xs leading-3 text-gray-600 mt-1">
-                          david@alphahulk.com
+                          {user?.email}
                         </p>
                       </div>
+
                       <FiChevronDown
                         onClick={() => {
-                          dispatch(toggleChevronIcon());
                           dispatch(toggleNavMenu());
                         }}
                         className={`${
-                          rotateChevronIcon ? "rotate-180" : ""
+                          showNavMenu ? "rotate-180" : ""
                         } cursor-pointer text-xl transform duration-100 xl:ml-7 lg:ml-3.5 ml-2 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-gray-800`}
                       />
                     </div>

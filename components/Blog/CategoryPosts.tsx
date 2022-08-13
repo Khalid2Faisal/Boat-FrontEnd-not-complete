@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 
-import { useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 import CategoryPostCard from "./CategoryPostCard";
 
 export default function CategoryPosts() {

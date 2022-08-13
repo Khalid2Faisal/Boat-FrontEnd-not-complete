@@ -1,13 +1,12 @@
 import React, { useEffect, FormEvent } from "react";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
 import { IoMdBoat } from "react-icons/io";
 
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
   toggleLoginModal,
   toggleRegisterModal,
-} from "../features/navigation/navigationSlice";
+} from "../../features/navigation/navigationSlice";
 
 interface ActivateProps {
   userName: string;
@@ -26,19 +25,17 @@ export default function AccountActivation({
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(message);
       router.push("/");
       dispatch(toggleLoginModal());
     }
     if (isError) {
-      toast.error(message);
       router.push("/");
       dispatch(toggleRegisterModal());
     }
-  }, [router, dispatch, isSuccess, isError, isLoading, message]);
+  }, [isSuccess, isError, isLoading, message]);
 
   return (
-    <div className="fixed transition-opacity ease-in bg-gray-400 inset-0 bg-opacity-50 backdrop-blur-md">
+    <div className="fixed transition-opacity ease-in bg-slate-100 inset-0 bg-opacity-50 backdrop-blur-md">
       <div
         className="fixed transition-opacity ease-in top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full lg:w-1/2 xl:w-2/6 z-60 overflow-y-auto"
         id="registerUserModal"
@@ -60,11 +57,11 @@ export default function AccountActivation({
               tabIndex={0}
               role="heading"
               aria-label="Activate your account"
-              className="text-2xl font-extrabold leading-6 text-gray-800 mt-8"
+              className="text-2xl font-extrabold leading-8 text-gray-800 mt-8"
             >
               Hey {userName}, Welcome to Boat Travel.
             </p>
-            <p className="text-sm mt-8 font-medium text-gray-500 leading-4">
+            <p className="text-sm mt-8 font-medium text-gray-500 leading-5">
               Boat Travel added you as a new user. Activate your account to
               continue by clicking the button below.
             </p>

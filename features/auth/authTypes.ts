@@ -14,7 +14,9 @@ export interface User {
   _id: string;
   name: string;
   username: string;
+  email?: string;
   about?: string;
+  hasimage: boolean;
 }
 
 export interface authState {

@@ -55,6 +55,22 @@ export const login = createAsyncThunk(
   }
 );
 
+export const googleLogin = createAsyncThunk(
+  "auth/googleLogin",
+  async (tokenId: string, thunkAPI) => {
+    try {
+      const loginData = await authService.googleLogin({ tokenId });
+      if (loginData) {
+        authService.authenticate(loginData);
+      }
+      return loginData;
+    } catch (error: any) {
+      const message = "Google login failed";
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 type LogOutArgs = Function | undefined;
 
 export const logout = createAsyncThunk(
