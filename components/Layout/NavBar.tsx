@@ -17,6 +17,7 @@ import { logout } from "../../features/auth/authThunk";
 import { reset } from "../../features/auth/authSlice";
 import { BsPen } from "react-icons/bs";
 import { FaHashtag } from "react-icons/fa";
+import Search from "../Forms/Search";
 
 export default function NavBar() {
   const dispatch = useAppDispatch();
@@ -86,15 +87,7 @@ export default function NavBar() {
                     </div>
                   )}
 
-                  <div className=" focus:outline-none focus:ring foucs:ring-offset-2 focus:ring-gray-800 bg-gray-50 flex items-center px-4 py-3.5 space-x-3 rounded ">
-                    <IoMdSearch className="text-gray-500 text-xl" />
-                    <input
-                      aria-label="Search Bar"
-                      className="focus:outline-none w-56  xl:w-64 bg-gray-50 font-normal text-sm leading-4 text-gray-500 placeholder-gray-500 "
-                      type="text"
-                      placeholder="Search"
-                    />
-                  </div>
+                  <Search />
                 </div>
                 {!isSSR && user ? (
                   <div className=" hidden sm:flex justify-end flex-row lg:pr-7 sm:pr-6 py-6 pr-4 pl-8">
@@ -193,15 +186,7 @@ export default function NavBar() {
                     </div>
                   )}
 
-                  <div className=" focus:outline-none focus:ring foucs:ring-offset-2 focus:ring-gray-800 bg-gray-50 flex items-center px-4 py-3.5 space-x-3 rounded ">
-                    <IoMdSearch className="text-gray-500 text-lg" />
-                    <input
-                      aria-label="Search Bar"
-                      className=" focus:outline-none w-44 lg:w-56 xl:w-64 bg-gray-50 font-normal text-sm leading-4 text-gray-500 placeholder-gray-500 "
-                      type="text"
-                      placeholder="Search"
-                    />
-                  </div>
+                  <Search />
                 </div>
               </div>
             </nav>
@@ -231,15 +216,7 @@ export default function NavBar() {
                 </div>
               )}
 
-              <div className=" w-auto sm:w-96 focus:outline-none focus:ring foucs:ring-offset-2 focus:ring-gray-800 bg-gray-50 flex items-center pl-4  space-x-3 rounded mt-4 ">
-                <IoMdSearch className="text-gray-500 text-lg" />
-                <input
-                  aria-label="Search Bar"
-                  className=" focus:outline-none w-full bg-gray-50 font-normal pl-2 text-sm leading-4  py-3.5 text-gray-500 placeholder-gray-500 "
-                  type="text"
-                  placeholder="Search"
-                />
-              </div>
+              <Search />
             </div>
             {!isSSR && user ? (
               <ul className="flex flex-col justify-between items-start p-4 absolute bottom-20 left-0 w-full bg-gray-50">
