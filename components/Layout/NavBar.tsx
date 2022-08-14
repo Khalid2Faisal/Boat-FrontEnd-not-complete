@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { IoMdBoat, IoMdClose, IoMdSearch } from "react-icons/io";
-import { BiUser, BiMenu, BiUserPlus } from "react-icons/bi";
+import { BiUser, BiMenu, BiUserPlus, BiCategoryAlt } from "react-icons/bi";
 import { FiSettings, FiLogOut, FiChevronDown } from "react-icons/fi";
 
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
@@ -15,6 +15,8 @@ import {
 } from "../../features/navigation/navigationSlice";
 import { logout } from "../../features/auth/authThunk";
 import { reset } from "../../features/auth/authSlice";
+import { BsPen } from "react-icons/bs";
+import { FaHashtag } from "react-icons/fa";
 
 export default function NavBar() {
   const dispatch = useAppDispatch();
@@ -180,14 +182,17 @@ export default function NavBar() {
               <div className="lg:hidden hidden sm:flex flex-col lg:px-7 sm:px-6 px-4 ">
                 <hr className=" w-full bg-gray-200 " />
                 <div className="lg:hidden flex flex-auto justify-between mt-3 flex-row pb-4">
-                  <div>
-                    <p className=" font-normal text-xs leading-3 text-gray-600">
-                      Hi David
-                    </p>
-                    <h3 className=" font-bold text-xl leading-5 text-gray-800 mt-2">
-                      Welcome Back
-                    </h3>
-                  </div>
+                  {!isSSR && user && (
+                    <div>
+                      <p className=" font-normal text-xs leading-3 text-gray-600">
+                        Hi {user?.name}
+                      </p>
+                      <h3 className=" font-bold text-xl leading-5 text-gray-800 mt-2">
+                        Welcome Back
+                      </h3>
+                    </div>
+                  )}
+
                   <div className=" focus:outline-none focus:ring foucs:ring-offset-2 focus:ring-gray-800 bg-gray-50 flex items-center px-4 py-3.5 space-x-3 rounded ">
                     <IoMdSearch className="text-gray-500 text-lg" />
                     <input
@@ -212,16 +217,20 @@ export default function NavBar() {
           <div className=" flex flex-col justify-between h-full ">
             <div className=" flex flex-col lg:px-7 sm:px-6 px-4">
               <hr className=" w-full bg-gray-200 " />
-              <div className="lg:hidden flex flex-auto justify-between mt-3 flex-row pb-4">
-                <div>
-                  <p className=" font-normal text-xs leading-3 text-gray-600">
-                    Hi David
-                  </p>
-                  <h3 className=" font-bold text-xl leading-5 text-gray-800 mt-2">
-                    Welcome Back
-                  </h3>
+
+              {!isSSR && user && (
+                <div className="lg:hidden flex flex-auto justify-between mt-3 flex-row pb-4">
+                  <div>
+                    <p className=" font-normal text-xs leading-3 text-gray-600">
+                      Hi {user?.name}
+                    </p>
+                    <h3 className=" font-bold text-xl leading-5 text-gray-800 mt-2">
+                      Welcome Back
+                    </h3>
+                  </div>
                 </div>
-              </div>
+              )}
+
               <div className=" w-auto sm:w-96 focus:outline-none focus:ring foucs:ring-offset-2 focus:ring-gray-800 bg-gray-50 flex items-center pl-4  space-x-3 rounded mt-4 ">
                 <IoMdSearch className="text-gray-500 text-lg" />
                 <input
@@ -233,7 +242,25 @@ export default function NavBar() {
               </div>
             </div>
             {!isSSR && user ? (
-              <ul className="flex flex-col justify-between items-start p-4 absolute bottom-22 left-0 w-full bg-gray-50">
+              <ul className="flex flex-col justify-between items-start p-4 absolute bottom-20 left-0 w-full bg-gray-50">
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div className="flex items-center">
+                    <BsPen className="text-xl text-current" />
+                    <span className="ml-2">Write Post</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div className="flex items-center">
+                    <FaHashtag className="text-xl text-current" />
+                    <span className="ml-2">Tags</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div className="flex items-center">
+                    <BiCategoryAlt className="text-xl text-current" />
+                    <span className="ml-2">Categories</span>
+                  </div>
+                </li>
                 <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                   <div className="flex items-center">
                     <BiUser className="text-xl text-current" />
@@ -254,34 +281,52 @@ export default function NavBar() {
                 </li>
               </ul>
             ) : (
-              <ul className="flex flex-col justify-between items-start p-4 absolute bottom-22 left-0 w-full bg-gray-50">
-                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                  <div onClick={toggleRegister} className="flex items-center">
-                    <BiUserPlus className="text-xl text-current" />
-                    <span className="ml-2">Register</span>
-                  </div>
-                </li>
+              <ul className="flex flex-col justify-between items-start p-4 absolute  bottom-0 left-0 w-full bg-gray-50">
                 <li className="cursor-pointer text-indigo-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
                   <div onClick={toggleLogin} className="flex items-center">
                     <FiLogOut className="text-xl text-current" />
                     <span className="ml-2">Login</span>
                   </div>
                 </li>
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div onClick={toggleRegister} className="flex items-center">
+                    <BiUserPlus className="text-xl text-current" />
+                    <span className="ml-2">Register</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div className="flex items-center">
+                    <BsPen className="text-xl text-current" />
+                    <span className="ml-2">Write Post</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div className="flex items-center">
+                    <FaHashtag className="text-xl text-current" />
+                    <span className="ml-2">Tags</span>
+                  </div>
+                </li>
+                <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
+                  <div className="flex items-center">
+                    <BiCategoryAlt className="text-xl text-current" />
+                    <span className="ml-2">Categories</span>
+                  </div>
+                </li>
               </ul>
             )}
             {!isSSR && user ? (
-              <div className=" flex items-center flex-row py-6 px-8 bg-gray-100 absolute bottom-0 left-0 w-full">
-                <img
+              <div className=" flex items-center flex-row py-6 px-2 bg-gray-100 absolute bottom-0 left-0 w-full">
+                {/* <img
                   className="w-10 h-10 "
                   src="https://i.ibb.co/QMddNDb/Ellipse-14.png"
                   alt="individual person image-3"
-                />
+                /> */}
                 <div className="ml-2">
                   <p className="text-lg leading-4 font-semibold text-gray-800">
-                    David Hulk
+                    {user.name}
                   </p>
                   <p className=" font-normal text-xs leading-3 text-gray-600 mt-1">
-                    david@alphahulk.com
+                    {user.email}
                   </p>
                 </div>
               </div>
