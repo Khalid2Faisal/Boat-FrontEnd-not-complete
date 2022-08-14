@@ -24,7 +24,7 @@ export default function RegisterUser() {
   };
 
   return (
-    <div className="fixed transition bg-slate-100 inset-0 bg-opacity-50 backdrop-blur-md">
+    <div className="fixed transition ease-in duration-1000 bg-slate-100 inset-0 bg-opacity-50 backdrop-blur-md">
       <div
         className="fixed transition top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full lg:w-1/2 xl:w-2/6 z-60 overflow-y-auto"
         id="registerUserModal"

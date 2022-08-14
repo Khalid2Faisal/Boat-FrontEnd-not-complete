@@ -7,14 +7,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 7px;
   background: transparent;
 }
 ::-webkit-scrollbar-track {
   background: #e0e7ff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #a5b4fc;
+  background: #6366f1;
   border-radius: 20px;
 }
 
