@@ -1,5 +1,5 @@
 import React from "react";
-import { GetServerSideProps } from "next";
+import { NextPage, GetServerSideProps } from "next";
 
 import { useAppSelector } from "../../../app/hooks";
 import blogService from "../../../services/blog";
@@ -9,13 +9,12 @@ import PostContent from "../../../components/Blog/PostContent";
 import RelatedPosts from "../../../components/Blog/RelatedPosts";
 // import DisqusThread from "../../../components/DisqusThread";
 
-const Post = ({
-  post,
-  relatedPosts,
-}: {
+interface Props {
   post: BlogPost;
   relatedPosts: BlogPost[];
-}) => {
+}
+
+const Post: NextPage<Props> = ({ post, relatedPosts }) => {
   const { showMobileMenu } = useAppSelector((state) => state.navigation.layout);
 
   return (

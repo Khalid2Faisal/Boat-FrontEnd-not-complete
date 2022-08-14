@@ -4,6 +4,7 @@ import getSize from "./getSize";
 import getCategoryPosts from "./getCategoryPosts";
 import getSinglePost from "./getSinglePost";
 import getRelatedPosts from "./getRelatedPosts";
+import getSearchPosts from "./getSearchPosts";
 
 export default {
   listAllPosts,
@@ -12,4 +13,5 @@ export default {
   getCategoryPosts,
   getSinglePost,
   getRelatedPosts,
+  getSearchPosts,
 };
