@@ -5,8 +5,10 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { BsArrowRight } from "react-icons/bs";
 import { BlogPost } from "../../features/blog/blogTypes";
 
+/* Extending the dayjs library with the relativeTime plugin. */
 dayjs.extend(relativeTime);
 
+/* Defining the props that the component will receive. */
 interface FeaturedPostCardProps {
   post: BlogPost;
   index: number;

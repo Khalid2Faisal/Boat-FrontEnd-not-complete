@@ -7,8 +7,10 @@ import { BiTime } from "react-icons/bi";
 import smartTrim from "../../helpers/smartTrim";
 import { BlogPost } from "../../features/blog/blogTypes";
 
+/* Extending the dayjs library with the relativeTime plugin. */
 dayjs.extend(relativeTime);
 
+/* Defining the props that the component will receive. */
 interface PostCardProps {
   post: BlogPost;
   hasUser?: boolean;
@@ -36,6 +38,8 @@ export default function PostCard({ post, hasUser }: PostCardProps) {
         </Link>
         <div className="lg:mt-5 mt-8">
           <div className="flex items-center justify-between">
+            {/* Checking if the post has a postedBy property and if the hasUser prop is true. If both
+            are true, it will render the div. */}
             {post.postedBy && hasUser && (
               <div className="flex items-center">
                 <div className="flex items-center justify-center rounded-full md:w-10 md:h-10 w-10 h-10">

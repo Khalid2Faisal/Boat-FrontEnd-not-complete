@@ -13,6 +13,7 @@ interface IFormInput {
 export default function RegisterForm({ isError }: { isError: boolean }) {
   const dispatch = useAppDispatch();
 
+  /* Destructuring the useForm hook. */
   const {
     register,
     handleSubmit,
@@ -20,12 +21,18 @@ export default function RegisterForm({ isError }: { isError: boolean }) {
     formState: { errors },
   } = useForm<IFormInput>();
 
+  /* Resetting the form when the isError prop is true. */
   useEffect(() => {
     if (isError) {
       reset();
     }
   }, [isError]);
 
+  /**
+   * OnFormSubmit is a function that takes in a data object of type IFormInput and returns a dispatch
+   * function that takes in a preRegister function that takes in a data object of type IFormInput
+   * @param data - IFormInput
+   */
   const onFormSubmit: SubmitHandler<IFormInput> = (data) => {
     dispatch(preRegister(data));
   };
@@ -115,7 +122,7 @@ export default function RegisterForm({ isError }: { isError: boolean }) {
           className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
           type="submit"
         >
-          Login
+          Register
         </button>
       </div>
     </form>

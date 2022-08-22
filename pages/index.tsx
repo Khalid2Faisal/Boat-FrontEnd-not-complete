@@ -28,19 +28,25 @@ const Home: NextPage = () => {
   const { showMobileMenu } = useAppSelector((state) => state.navigation.layout);
   const dispatch = useAppDispatch();
 
+  /* Creating a category object with a slug property. */
   const firstCategory = { slug: "tourism" };
   const secondCategory = { slug: "travel" };
   const thirdCategory = { slug: "restaurants" };
 
+  /* Dispatching the getPosts action with the skip and limit values. */
   useEffect(() => {
     dispatch(getPosts({ skip, limit }));
   }, []);
+  /* Dispatching the getFeaturedPosts action. */
   useEffect(() => {
     dispatch(getFeaturedPosts());
   }, []);
+  /* Dispatching the getBlogSize action. */
   useEffect(() => {
     dispatch(getBlogSize());
   }, []);
+  /* Dispatching the getCategoryPosts action with the firstCategory, secondCategory, and thirdCategory
+  objects. */
   useEffect(() => {
     dispatch(getCategoryPosts(firstCategory));
     dispatch(getCategoryPosts(secondCategory));

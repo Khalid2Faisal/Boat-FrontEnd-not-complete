@@ -15,6 +15,7 @@ interface LayoutProps {
   title?: string;
 }
 
+/* A configuration for the NProgress library. */
 NProgress.configure({ showSpinner: false });
 
 export default function Layout({ children, title }: LayoutProps) {
@@ -23,6 +24,8 @@ export default function Layout({ children, title }: LayoutProps) {
     (state) => state.navigation.layout
   );
 
+  /* This is a way to use the NProgress library to show a progress bar when the user navigates to a new
+  page. */
   router.events?.on("routeChangeStart", () => NProgress.start());
   router.events?.on("routeChangeComplete", () => NProgress.done());
   router.events?.on("routeChangeError", () => NProgress.done());

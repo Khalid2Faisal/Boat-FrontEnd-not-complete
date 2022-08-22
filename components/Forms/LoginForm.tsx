@@ -12,6 +12,7 @@ interface IFormInput {
 export default function LoginForm({ isError }: { isError: boolean }) {
   const dispatch = useAppDispatch();
 
+  /* Destructuring the useForm hook. */
   const {
     register,
     handleSubmit,
@@ -19,12 +20,17 @@ export default function LoginForm({ isError }: { isError: boolean }) {
     formState: { errors },
   } = useForm<IFormInput>();
 
+  /* Resetting the form when there is an error. */
   useEffect(() => {
     if (isError) {
       reset();
     }
   }, [isError]);
 
+  /**
+   * OnFormSubmit is a function that takes in an object of type IFormInput and dispatch login.
+   * @param data - The data that was submitted by the user.
+   */
   const onFormSubmit: SubmitHandler<IFormInput> = (data) => {
     dispatch(login(data));
   };

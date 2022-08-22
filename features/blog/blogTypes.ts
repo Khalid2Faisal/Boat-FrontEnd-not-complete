@@ -1,3 +1,4 @@
+/* Defining the shape of the data that will be used in the application. */
 export interface Category {
   _id: string;
   name: string;
@@ -37,6 +38,7 @@ export interface BlogPost {
   updatedAt?: string;
 }
 
+// Defining the shape of the blog state.
 export interface BlogState {
   featuredPosts: BlogPost[];
   posts: BlogPost[];

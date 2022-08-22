@@ -3,6 +3,7 @@ import { RootState } from "../../app/store";
 import blogService from "../../services/blog";
 import { setSkip } from "../blog/blogSlice";
 
+// get featured posts thunk.
 export const getFeaturedPosts = createAsyncThunk(
   "blog/getFeaturedPosts",
   async () => {
@@ -15,6 +16,7 @@ export const getFeaturedPosts = createAsyncThunk(
   }
 );
 
+// get posts thunk.
 export const getPosts = createAsyncThunk(
   "blog/getPosts",
   async ({ skip, limit }: { skip: number; limit: number }) => {
@@ -27,6 +29,7 @@ export const getPosts = createAsyncThunk(
   }
 );
 
+// get more posts thunk.
 export const getMorePosts = createAsyncThunk(
   "blog/getMorePosts",
   async (_, thunkAPI) => {
@@ -43,6 +46,7 @@ export const getMorePosts = createAsyncThunk(
   }
 );
 
+// get post thunk.
 export const getBlogSize = createAsyncThunk("blog/getBlogSize", async () => {
   try {
     const data = await blogService.getSize();
@@ -52,6 +56,7 @@ export const getBlogSize = createAsyncThunk("blog/getBlogSize", async () => {
   }
 });
 
+// get posts for each category thunk.
 export const getCategoryPosts = createAsyncThunk(
   "blog/getCategoryPosts",
   async ({

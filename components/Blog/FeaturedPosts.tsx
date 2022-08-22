@@ -19,8 +19,8 @@ export default function FeaturedPosts() {
           role="contentinfo"
           className="text-base leading-normal text-center text-gray-600 mt-4"
         >
-          Whether article spirits new her covered hastily sitting her. Money
-          witty books nor son
+          Discover new places, get tips from locals, and find the best things to
+          do.
         </p>
         <div className="columns-1 sm:columns-2 xl:columns-3 2xl:px-40 2xl:mx-auto pt-10 xl:pt-14 gap-6">
           {featuredPosts.map((post, index) => (

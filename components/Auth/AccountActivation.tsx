@@ -23,6 +23,9 @@ export default function AccountActivation({
     (state) => state.auth
   );
 
+  /* Checking if the user is successfully registered and if so, it will redirect the user to the home
+  page and open the login modal. If the user is not successfully registered, it will redirect the
+  user to the home page and open the register modal. */
   useEffect(() => {
     if (isSuccess) {
       router.push("/");

@@ -8,6 +8,7 @@ import {
   getCategoryPosts,
 } from "./blogThunk";
 
+/* Defining the initial state of the reducer. */
 const initialState: BlogState = {
   featuredPosts: [],
   posts: [],
@@ -24,6 +25,7 @@ const initialState: BlogState = {
   categoryPostsIsLoading: true,
 };
 
+/* Creating a blog slice of the redux store. */
 export const blogSlice = createSlice({
   name: "blog",
   initialState,

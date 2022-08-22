@@ -30,10 +30,13 @@ export default function NavBar() {
     (state) => state.auth
   );
 
+  /* Setting the isSSR state to false. */
   useEffect(() => {
     setIsSSR(false);
   }, []);
 
+  /* Checking if the isSuccess or isError is true, if it is true then it will dispatch the reset()
+  function and then it will display a toast message. */
   useEffect(() => {
     if (isSuccess) {
       dispatch(reset());
@@ -47,13 +50,22 @@ export default function NavBar() {
     }
   }, [isSuccess, isError, message]);
 
+  /**
+   * ToggleRegister is a function that dispatches the toggleRegisterModal action.
+   */
   const toggleRegister = () => {
     dispatch(toggleRegisterModal());
   };
+  /**
+   * ToggleLogin is a function that dispatches the toggleLoginModal action.
+   */
   const toggleLogin = () => {
     dispatch(toggleLoginModal());
   };
 
+  /**
+   * OnLogout() is a function that dispatches the logout() action and the closeNavMenu() action.
+   */
   const onLogout = () => {
     dispatch(logout());
     dispatch(closeNavMenu());

@@ -9,6 +9,7 @@ import handleResponse from "./handleResponse";
 import isAuth from "./isAuth";
 import authenticate from "./authenticate";
 
+/* Exporting all the functions in the file. */
 export default {
   preRegister,
   register,

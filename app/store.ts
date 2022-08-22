@@ -3,6 +3,7 @@ import blogReducer from "../features/blog/blogSlice";
 import navigationReducer from "../features/navigation/navigationSlice";
 import authReducer from "../features/auth/authSlice";
 
+/* Creating a store with the reducers. */
 export const store = configureStore({
   reducer: {
     blog: blogReducer,

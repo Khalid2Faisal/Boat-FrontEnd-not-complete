@@ -32,6 +32,18 @@ const Post: NextPage<Props> = ({ post, relatedPosts }) => {
   );
 };
 
+/**
+ * It's a function that returns an object with a property called props, which is an object with two
+ * properties: post and relatedPosts.
+ * The post property is the result of calling the blogService.getSinglePost function, which returns a
+ * single post.
+ * The relatedPosts property is the result of calling the blogService.getRelatedPosts function, which
+ * returns an array of related posts.
+ *
+ * @param context - An object containing the following properties:
+ * @returns The return value of the function is an object with a props property. The props property is
+ * an object that will be passed to the page component as props.
+ */
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug } = context.query;
   const post = await blogService.getSinglePost(slug as string);

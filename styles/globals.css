@@ -1,3 +1,4 @@
+/* Importing the base, components, and utilities from tailwind.css. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

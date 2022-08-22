@@ -20,6 +20,11 @@ interface User {
 type OnClick = (e: FormEvent<HTMLButtonElement>) => void;
 type DisabledButton = boolean | undefined;
 
+/**
+ * GoogleButton is a function that takes an object with two properties, onClick and disabled, and
+ * returns a button that has an onClick handler and is disabled based on the value of the disabled
+ * property.
+ */
 const GoogleButton = ({
   onClick,
   disabled,
@@ -66,6 +71,13 @@ const GoogleButton = ({
 
 const GoogleAuth = () => {
   const dispatch = useAppDispatch();
+
+  /**
+   * OnResponse is a function that takes a parameter res, and returns a promise that resolves to the
+   * result of calling dispatch with the result of calling googleLogin with the tokenId property of
+   * res.
+   * @param {any} res - The response object from the Google API.
+   */
   const onResponse = async (res: any) => {
     const { tokenId } = res;
     dispatch(googleLogin(tokenId));

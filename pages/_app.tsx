@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
+      {/* A notification component. */}
       <ToastContainer hideProgressBar limit={1} />
     </Provider>
   );

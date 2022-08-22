@@ -13,12 +13,16 @@ export default function RegisterUser() {
   const dispatch = useAppDispatch();
   const { isError, isSuccess, message } = useAppSelector((state) => state.auth);
 
+  /* Checking if the user is successfully registered and if so, it will close the modal. */
   useEffect(() => {
     if (isSuccess) {
       dispatch(toggleRegisterModal());
     }
   }, [isSuccess, isError, message]);
 
+  /**
+   * OnClose is a function that dispatches the toggleRegisterModal action creator.
+   */
   const onClose = () => {
     dispatch(toggleRegisterModal());
   };

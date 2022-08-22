@@ -4,8 +4,10 @@ import { preRegister, register, login, googleLogin, logout } from "./authThunk";
 import localStorageService from "../../services/auth/localStorage";
 import { authState } from "./authTypes";
 
+/* Getting the user from local storage. */
 const user = localStorageService.getItem("user");
 
+/* Setting the initial state of the reducer. */
 const initialState: authState = {
   user: user ? user : null,
   isError: false,
@@ -14,10 +16,12 @@ const initialState: authState = {
   message: "",
 };
 
+/* Creating auth slice. */
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    /* Resetting the state of the reducer. */
     reset: (state) => {
       state.isError = false;
       state.isSuccess = false;

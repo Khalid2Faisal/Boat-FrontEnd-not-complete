@@ -5,6 +5,7 @@ export interface LayoutNavigation {
   showLoginModal: boolean;
 }
 
+// creating the shape of the navigation state
 export interface NavigationState {
   layout: LayoutNavigation;
 }

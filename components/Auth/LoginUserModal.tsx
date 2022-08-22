@@ -13,12 +13,16 @@ export default function LoginUser() {
   const dispatch = useAppDispatch();
   const { isSuccess, isError, message } = useAppSelector((state) => state.auth);
 
+  /* Checking if the user is successfully logged in, if so, it will close the modal. */
   useEffect(() => {
     if (isSuccess) {
       dispatch(toggleLoginModal());
     }
   }, [isSuccess, isError, message]);
 
+  /**
+   * OnClose is a function that dispatches the toggleLoginModal action creator.
+   */
   const onClose = () => {
     dispatch(toggleLoginModal());
   };

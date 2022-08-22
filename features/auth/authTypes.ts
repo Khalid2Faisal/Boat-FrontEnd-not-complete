@@ -1,3 +1,4 @@
+/* Defining the types of the data that will be used in the reducer. */
 export interface PreRegisterData {
   name: string;
   email: string;
@@ -19,6 +20,7 @@ export interface User {
   hasimage: boolean;
 }
 
+// Defining the shape of the auth state.
 export interface authState {
   user: User | null;
   isError: boolean;

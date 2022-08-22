@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NavigationState } from "./navigationTypes";
 
+/* Defining the initial state of the reducer. */
 const initialState: NavigationState = {
   layout: {
     showMobileMenu: false,

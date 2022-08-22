@@ -9,6 +9,7 @@ export default function DisqusThread({
   title: string;
 }) {
   const disqusShortname = process.env.NEXT_PUBLIC_DISQUS_SHORTNAME as string;
+  /* Creating a disqusConfig object with the url, identifier, and title. */
   const disqusConfig = {
     url: `${process.env.NEXT_PUBLIC_DOMAIN}/blog/post/${slug}`,
     identifier: slug,

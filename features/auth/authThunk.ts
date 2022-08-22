@@ -4,6 +4,7 @@ import authService from "../../services/auth";
 
 import { PreRegisterData } from "./authTypes";
 
+// preRegister user thunk.
 export const preRegister = createAsyncThunk(
   "auth/preRegister",
   async (data: PreRegisterData, thunkAPI) => {
@@ -19,7 +20,7 @@ export const preRegister = createAsyncThunk(
   }
 );
 
-// Register user
+// Register user thunk.
 export const register = createAsyncThunk(
   "auth/register",
   async (user: { token: string }, thunkAPI) => {
@@ -35,7 +36,7 @@ export const register = createAsyncThunk(
   }
 );
 
-// Login user
+// Login user thunk.
 export const login = createAsyncThunk(
   "auth/login",
   async (user: { email: string; password: string }, thunkAPI) => {
@@ -54,7 +55,7 @@ export const login = createAsyncThunk(
     }
   }
 );
-
+// Google login user thunk.
 export const googleLogin = createAsyncThunk(
   "auth/googleLogin",
   async (tokenId: string, thunkAPI) => {
@@ -73,6 +74,7 @@ export const googleLogin = createAsyncThunk(
 
 type LogOutArgs = Function | undefined;
 
+// Logout user thunk.
 export const logout = createAsyncThunk(
   "auth/logout",
   async (next: LogOutArgs, thunkAPI) => {

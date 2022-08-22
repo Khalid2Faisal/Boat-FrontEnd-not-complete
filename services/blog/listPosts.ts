@@ -5,6 +5,15 @@ interface RequestData {
   limit: number;
 }
 
+/**
+ * It's a function that makes a post request to the server with a data object that contains skip and
+ * limit properties.
+ * @param {number} [skip=0] - number = 0,
+ * @param {number} [limit=10] - number = 10
+ * @returns The response.data is an object with the following properties: {
+ *  posts: Post[], categories: Category[], tags: Tag[]
+ * }
+ */
 export default async function listAllPosts(
   skip: number = 0,
   limit: number = 10

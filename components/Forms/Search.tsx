@@ -10,6 +10,7 @@ type IFormInput = {
 
 export default function Search() {
   const router = useRouter();
+  /* Destructuring the useForm hook. */
   const {
     register,
     handleSubmit,
@@ -18,8 +19,11 @@ export default function Search() {
     formState: { errors },
   } = useForm<IFormInput>();
 
+  /* Getting the value of the input field. */
   const { search } = getValues();
 
+  /* Checking if there is an error in the search field. If there is an error, it will display a toast
+  message. */
   useEffect(() => {
     if (errors.search) {
       toast.error(errors.search.message, {
@@ -30,6 +34,11 @@ export default function Search() {
     toast.clearWaitingQueue();
   }, [errors, search]);
 
+  /**
+   * OnFormSubmit is a function that takes in data, and then pushes the data to the router, and then
+   * resets the form.
+   * @param data - The data that was submitted from the form.
+   */
   const onFormSubmit: SubmitHandler<IFormInput> = (data) => {
     router.push(`/search/${data.search}`);
     reset();

@@ -6,7 +6,9 @@ import { BlogPost } from "../../features/blog/blogTypes";
 
 export default function PostContent({ post }: { post: BlogPost }) {
   const { title, categories, tags, body, slug, postedBy } = post;
+  /* A way to access the name property of the category object. */
   const categoryName = categories?.map((category) => category.name);
+  /* Accessing the slug property of the category object. */
   const categorySlug = categories?.map((category) => category.slug);
 
   return (
@@ -42,6 +44,8 @@ export default function PostContent({ post }: { post: BlogPost }) {
           )}
 
           <div className="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm p-2">
+            {/* Checking if the postedBy property is not null. If it is not null, then it will render
+            the div. */}
             {postedBy && (
               <div className="p-4 border">
                 <div className="flex items-center py-2">
@@ -59,6 +63,8 @@ export default function PostContent({ post }: { post: BlogPost }) {
               </div>
             )}
 
+            {/* check if the tags property is not null. If it is not null, then it will render
+            the div. */}
             {tags && (
               <div className="p-4 border mt-6">
                 <h3 className="text-xl text-gray-700 font-bold">Tags</h3>

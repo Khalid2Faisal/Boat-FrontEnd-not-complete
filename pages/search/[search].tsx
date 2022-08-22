@@ -11,6 +11,10 @@ interface Props {
 }
 
 const Search: NextPage<Props> = ({ posts, search }) => {
+  /**
+   * If there are no search results, render a message to the user.
+   * @returns A function that returns a div with some text.
+   */
   const renderEmptyState = () => {
     return (
       <div className="text-center mt-16 min-h-[20rem] flex flex-col justify-center">
